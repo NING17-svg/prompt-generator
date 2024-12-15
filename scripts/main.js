@@ -1,8 +1,8 @@
 // API配置
 const API_CONFIG = {
-    url: process.env.NEXT_PUBLIC_API_URL || "https://api.bltcy.ai",
-    key: process.env.API_KEY,
-    model: process.env.NEXT_PUBLIC_API_MODEL || "gpt-4o-mini"
+    url: window.NEXT_PUBLIC_API_URL || "https://api.bltcy.ai",
+    key: window.API_KEY,
+    model: window.NEXT_PUBLIC_API_MODEL || "gpt-4o-mini"
 };
 
 // 获取所有DOM元素
@@ -76,7 +76,7 @@ try {
     const savedTranslations = localStorage.getItem('translation_cache');
     if (savedTranslations) {
         translationCache = JSON.parse(savedTranslations);
-        console.log('从本地存储加载翻译缓存');
+        console.log('��本地存储加载翻译缓存');
     }
 } catch (error) {
     console.error('加载翻译缓存失败:', error);
@@ -158,7 +158,7 @@ function calculateSimilarity(str1, str2) {
     // 如果处理后完全相同
     if (processed1 === processed2) return 1;
     
-    // 如果一个是另一个的��串
+    // 如果一���是另一个的串
     if (processed1.includes(processed2) || processed2.includes(processed1)) {
         return Math.min(processed1.length, processed2.length) / Math.max(processed1.length, processed2.length);
     }
@@ -236,7 +236,7 @@ async function translate(text) {
         return apiTranslation;
     }
     
-    // 如果API翻���失败，返回原文
+    // 如果API翻译失败，返回原文
     console.log(`翻译失败，返回原文: ${text}`);
     return text;
 }
@@ -321,7 +321,7 @@ async function generatePrompt() {
         showStatus('提示词生成成功！', 'success');
         setTimeout(hideStatus, 3000);
     } catch (error) {
-        console.error('生成提示词失败:', error);
+        console.error('生��提示词失败:', error);
         showStatus('生成提示词失败', 'error');
     } finally {
         generateButton.disabled = false;

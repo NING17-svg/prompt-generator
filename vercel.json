@@ -2,11 +2,15 @@
   "version": 2,
   "builds": [
     {
-      "src": "*.html",
+      "src": "**/*",
       "use": "@vercel/static"
     }
   ],
   "routes": [
+    {
+      "src": "/scripts/env.js",
+      "dest": "/scripts/env.js"
+    },
     {
       "src": "/(.*)",
       "dest": "/$1"

@@ -1,0 +1,3 @@
+window.API_KEY = '{{API_KEY}}';
+window.NEXT_PUBLIC_API_URL = '{{NEXT_PUBLIC_API_URL}}';
+window.NEXT_PUBLIC_API_MODEL = '{{NEXT_PUBLIC_API_MODEL}}'; 
