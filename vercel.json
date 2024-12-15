@@ -2,32 +2,19 @@
   "version": 2,
   "builds": [
     {
-      "src": "scripts/env.js",
-      "use": "@vercel/static",
-      "config": {
-        "zeroConfig": true
-      }
-    },
-    {
       "src": "**/*",
       "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/scripts/env.js",
-      "dest": "/scripts/env.js"
-    },
-    {
       "src": "/(.*)",
       "dest": "/$1"
     }
   ],
-  "build": {
-    "env": {
-      "API_KEY": "@api_key",
-      "NEXT_PUBLIC_API_URL": "@next_public_api_url",
-      "NEXT_PUBLIC_API_MODEL": "@next_public_api_model"
-    }
+  "env": {
+    "API_KEY": "@api_key",
+    "NEXT_PUBLIC_API_URL": "@next_public_api_url",
+    "NEXT_PUBLIC_API_MODEL": "@next_public_api_model"
   }
 } 
