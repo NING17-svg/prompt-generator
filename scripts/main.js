@@ -1,8 +1,8 @@
 // API配置
 const API_CONFIG = {
-    url: "https://api.bltcy.ai",
-    key: "sk-ISpPXk088Byag1phC284E6Ce28B542D8B4C716302d017748",
-    model: "gpt-4o-mini"
+    url: process.env.NEXT_PUBLIC_API_URL || "https://api.bltcy.ai",
+    key: process.env.API_KEY,
+    model: process.env.NEXT_PUBLIC_API_MODEL || "gpt-4o-mini"
 };
 
 // 获取所有DOM元素
@@ -158,7 +158,7 @@ function calculateSimilarity(str1, str2) {
     // 如果处理后完全相同
     if (processed1 === processed2) return 1;
     
-    // 如果一个是另一个的子串
+    // 如果一个是另一个的��串
     if (processed1.includes(processed2) || processed2.includes(processed1)) {
         return Math.min(processed1.length, processed2.length) / Math.max(processed1.length, processed2.length);
     }
@@ -236,7 +236,7 @@ async function translate(text) {
         return apiTranslation;
     }
     
-    // 如果API翻译失败，返回原文
+    // 如果API翻���失败，返回原文
     console.log(`翻译失败，返回原文: ${text}`);
     return text;
 }
