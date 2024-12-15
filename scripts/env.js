@@ -1,4 +1,2 @@
-// 环境变量配置
-window.API_KEY = '{{API_KEY}}';
-window.NEXT_PUBLIC_API_URL = '{{NEXT_PUBLIC_API_URL}}';
-window.NEXT_PUBLIC_API_MODEL = '{{NEXT_PUBLIC_API_MODEL}}'; 
+// API配置
+window.API_BASE_URL = window.location.origin;

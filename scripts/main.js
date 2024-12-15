@@ -1,8 +1,6 @@
 // API配置
 const API_CONFIG = {
-    url: window.NEXT_PUBLIC_API_URL || "https://api.bltcy.ai",
-    key: window.API_KEY,
-    model: window.NEXT_PUBLIC_API_MODEL || "gpt-4o-mini"
+    url: window.API_BASE_URL
 };
 
 // 获取所有DOM元素
@@ -76,7 +74,7 @@ try {
     const savedTranslations = localStorage.getItem('translation_cache');
     if (savedTranslations) {
         translationCache = JSON.parse(savedTranslations);
-        console.log('��本地存储加载翻译缓存');
+        console.log('本地存储加载翻译缓存');
     }
 } catch (error) {
     console.error('加载翻译缓存失败:', error);
@@ -97,28 +95,12 @@ function saveTranslation(text, translation) {
 async function translateWithAPI(text) {
     try {
         showStatus('正在调用翻译API...');
-        const response = await fetch(`${API_CONFIG.url}/v1/chat/completions`, {
+        const response = await fetch(`${API_CONFIG.url}/api/translate`, {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${API_CONFIG.key}`,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                model: API_CONFIG.model,
-                temperature: 0.7,
-                top_p: 1,
-                messages: [
-                    {
-                        role: "system",
-                        content: "你是一个专业的中英翻译助手。请将以下中文翻译成英文，只返回翻译结果，不要有任何解释。"
-                    },
-                    {
-                        role: "user",
-                        content: `请将这段中文翻译成英文：${text}`
-                    }
-                ],
-                stream: false
-            })
+            body: JSON.stringify({ text })
         });
 
         if (!response.ok) {
@@ -126,8 +108,8 @@ async function translateWithAPI(text) {
         }
 
         const result = await response.json();
-        if (result.choices && result.choices.length > 0) {
-            return result.choices[0].message.content.trim();
+        if (result.translation) {
+            return result.translation;
         }
         throw new Error('API返回格式错误');
     } catch (error) {
@@ -158,7 +140,7 @@ function calculateSimilarity(str1, str2) {
     // 如果处理后完全相同
     if (processed1 === processed2) return 1;
     
-    // 如果一���是另一个的串
+    // 如果一个是另一个的串
     if (processed1.includes(processed2) || processed2.includes(processed1)) {
         return Math.min(processed1.length, processed2.length) / Math.max(processed1.length, processed2.length);
     }
@@ -321,7 +303,7 @@ async function generatePrompt() {
         showStatus('提示词生成成功！', 'success');
         setTimeout(hideStatus, 3000);
     } catch (error) {
-        console.error('生��提示词失败:', error);
+        console.error('生成提示词失败:', error);
         showStatus('生成提示词失败', 'error');
     } finally {
         generateButton.disabled = false;
