@@ -5,16 +5,5 @@
       "src": "**/*",
       "use": "@vercel/static"
     }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
-  ],
-  "env": {
-    "API_KEY": "@api_key",
-    "NEXT_PUBLIC_API_URL": "@next_public_api_url",
-    "NEXT_PUBLIC_API_MODEL": "@next_public_api_model"
-  }
+  ]
 } 
