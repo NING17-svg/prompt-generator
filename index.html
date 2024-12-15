@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI绘画提示词生成器</title>
+    <!-- 引入TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入自定义样式 -->
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body class="bg-gray-50">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-center mb-8">AI绘画提示词生成器</h1>
+        
+        <!-- 添加全局状态显示区域 -->
+        <div id="status" class="mb-4 p-4 rounded-md hidden">
+            <p id="status-text" class="text-sm text-center"></p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- 左侧输入区域 -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-xl font-semibold mb-4">输入提示词</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">构图信息</label>
+                        <textarea id="composition" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" rows="2" placeholder="例如：full body, facing the camera"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">主体描述</label>
+                        <textarea id="subject" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" rows="2" placeholder="例如：a breathtakingly beautiful 20-year-old woman"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">服装</label>
+                        <textarea id="clothing" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" rows="2" placeholder="例如：white formal gown"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">人物动作</label>
+                        <textarea id="action" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" rows="2" placeholder="例如：dance, barefoot"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">动物描述</label>
+                        <textarea id="animal" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" rows="2" placeholder="例如：a big seal, a white horse"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">互动方式</label>
+                        <textarea id="interaction" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" rows="2" placeholder="例如：hugging, riding on, next to, behind"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">环境</label>
+                        <textarea id="environment" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" rows="2" placeholder="例如：ice and snow, sunshine"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">背景</label>
+                        <textarea id="background" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" rows="2" placeholder="例如：Long blurred background"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">画质要求</label>
+                        <textarea id="quality" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" rows="2" placeholder="例如：realistic, include as much detail as possible"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">技术参数</label>
+                        <textarea id="technical" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" rows="2" placeholder="例如：4K, shot on Canon A7C2"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">约束条件</label>
+                        <textarea id="constraints" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" rows="2" placeholder="例如：--no sexy --ar 9:16"></textarea>
+                    </div>
+                    <button id="generate" class="w-full bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        生成提示词
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 右侧预览区域 -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-xl font-semibold mb-4">预览</h2>
+                <div class="space-y-4">
+                    <textarea id="preview" class="w-full h-48 p-4 rounded-md border-gray-300 bg-gray-50" readonly></textarea>
+                    <button id="copy" class="w-full bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+                        复制到剪贴板
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 引入主逻辑 -->
+    <script type="module" src="scripts/main.js"></script>
+</body>
+</html> 

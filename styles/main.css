@@ -1,0 +1,22 @@
+/* 自定义样式 */
+textarea {
+    resize: none;
+    border: 1px solid #e5e7eb;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.container {
+    max-width: 1200px;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+} 
