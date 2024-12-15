@@ -1,6 +1,6 @@
 // API配置
 const API_CONFIG = {
-    url: window.API_BASE_URL
+    url: window.API_BASE_URL || window.location.origin
 };
 
 // 获取所有DOM元素
@@ -94,7 +94,10 @@ function saveTranslation(text, translation) {
 // API翻译函数
 async function translateWithAPI(text) {
     try {
+        console.log('开始翻译:', text);
         showStatus('正在调用翻译API...');
+        
+        console.log('调用API:', `${API_CONFIG.url}/api/translate`);
         const response = await fetch(`${API_CONFIG.url}/api/translate`, {
             method: 'POST',
             headers: {
@@ -103,18 +106,31 @@ async function translateWithAPI(text) {
             body: JSON.stringify({ text })
         });
 
+        console.log('API响应状态:', response.status);
+        
         if (!response.ok) {
-            throw new Error(`API请求失败: ${response.status}`);
+            const errorData = await response.json().catch(() => ({}));
+            console.error('API请求失败:', {
+                status: response.status,
+                statusText: response.statusText,
+                error: errorData
+            });
+            throw new Error(`API请求失败: ${response.status} - ${errorData.error || response.statusText}`);
         }
 
         const result = await response.json();
+        console.log('API响应数据:', result);
+        
         if (result.translation) {
+            console.log('翻译成功:', result.translation);
             return result.translation;
         }
+        
+        console.error('API返回格式错误:', result);
         throw new Error('API返回格式错误');
     } catch (error) {
         console.error('翻译API调用失败:', error);
-        showStatus('翻译API调用失败', 'error');
+        showStatus(`翻译失败: ${error.message}`, 'error');
         return null;
     }
 }
@@ -196,7 +212,7 @@ async function translate(text) {
     
     for (const cachedText of Object.keys(translationCache)) {
         const similarity = calculateSimilarity(text, cachedText);
-        if (similarity > bestSimilarity && similarity > 0.9) { // 提高相似度阈值到0.9
+        if (similarity > bestSimilarity && similarity > 0.9) { // 提高相似度��值到0.9
             bestSimilarity = similarity;
             bestMatch = cachedText;
         }
