@@ -16,27 +16,10 @@
       "dest": "/api/$1"
     },
     {
-      "src": "^/scripts/(.*)",
-      "dest": "/public/scripts/$1"
-    },
-    {
-      "src": "^/styles/(.*)",
-      "dest": "/public/styles/$1"
-    },
-    {
-      "src": "^/$",
-      "dest": "/public/index.html"
-    },
-    {
-      "src": "^/test.html",
-      "dest": "/public/test.html"
-    },
-    {
-      "handle": "filesystem"
-    },
-    {
       "src": "/(.*)",
       "dest": "/public/$1"
     }
-  ]
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
 } 
